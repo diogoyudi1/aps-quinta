@@ -1,0 +1,368 @@
+{
+	"info": {
+		"_postman_id": "9a3f0d2c-6b1e-4c9a-9f0b-academia000001",
+		"name": "academia-system-API",
+		"description": "Collection da API REST do Academia System (APS - Desenvolvimento Back-End).\n\nEntidades: Planos e Alunos.\n\nComo usar: execute primeiro os endpoints de Planos, copie o 'id' retornado em POST - Criar Plano e cole na variável 'planoId' da collection. Depois execute os endpoints de Alunos.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Planos",
+			"item": [
+				{
+					"name": "GET - Listar Planos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/planos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"planos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET - Plano por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/planos/{{planoId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"planos",
+								"{{planoId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET - Pesquisar Planos (keyword)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/planos/search?keyword=musculacao",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"planos",
+								"search"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "musculacao"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Criar Plano",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/planos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"planos"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Musculação\",\n    \"descricao\": \"Treino de força com pesos livres e máquinas.\",\n    \"icon\": \"💪\",\n    \"ordem_exibicao\": 1,\n    \"valor_mensal\": 129.9,\n    \"duracao_meses\": 12,\n    \"ativo\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": [],
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const dados = pm.response.json();",
+									"",
+									"if (pm.response.code === 201 && dados && dados.id) {",
+									"    pm.collectionVariables.set(\"planoId\", dados.id);",
+									"    console.log(\"ID do plano salvo automaticamente na variável planoId:\", dados.id);",
+									"}"
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "PUT - Atualizar Plano",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/planos/{{planoId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"planos",
+								"{{planoId}}"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Musculação Premium\",\n    \"descricao\": \"Treino de força com acompanhamento de personal trainer.\",\n    \"icon\": \"💪\",\n    \"ordem_exibicao\": 1,\n    \"valor_mensal\": 199.9,\n    \"duracao_meses\": 12,\n    \"ativo\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE - Excluir Plano",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/planos/{{planoId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"planos",
+								"{{planoId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Alunos",
+			"item": [
+				{
+					"name": "GET - Listar Alunos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/alunos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"alunos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET - Aluno por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/alunos/{{alunoId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"alunos",
+								"{{alunoId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET - Alunos por Plano (relacionamento)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/alunos/plano/{{planoId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"alunos",
+								"plano",
+								"{{planoId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET - Pesquisar Alunos (keyword)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/alunos/search?keyword=eduardo",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"alunos",
+								"search"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "eduardo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Criar Aluno",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/alunos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"alunos"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"planoId\": \"{{planoId}}\",\n    \"nome\": \"Eduardo Lopes\",\n    \"descricao\": \"Aluno iniciante, com foco em hipertrofia.\",\n    \"email\": \"eduardo.lopes@email.com\",\n    \"telefone\": \"(41) 99999-1111\",\n    \"data_nascimento\": \"2003-05-14\",\n    \"valor_mensalidade\": 129.9,\n    \"ativo\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": [],
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"const dados = pm.response.json();",
+									"",
+									"if (pm.response.code === 201 && dados && dados.id) {",
+									"    pm.collectionVariables.set(\"alunoId\", dados.id);",
+									"    console.log(\"ID do aluno salvo automaticamente na variável alunoId:\", dados.id);",
+									"}"
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "PUT - Atualizar Aluno",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/alunos/{{alunoId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"alunos",
+								"{{alunoId}}"
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"planoId\": \"{{planoId}}\",\n    \"nome\": \"Eduardo Lopes\",\n    \"descricao\": \"Aluno intermediário, com foco em hipertrofia.\",\n    \"email\": \"eduardo.lopes@email.com\",\n    \"telefone\": \"(41) 99999-1111\",\n    \"data_nascimento\": \"2003-05-14\",\n    \"valor_mensalidade\": 199.9,\n    \"ativo\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE - Excluir Aluno",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/alunos/{{alunoId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"alunos",
+								"{{alunoId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "planoId",
+			"value": "cole-aqui-o-id-do-plano-criado",
+			"type": "string"
+		},
+		{
+			"key": "alunoId",
+			"value": "cole-aqui-o-id-do-aluno-criado",
+			"type": "string"
+		}
+	]
+}
