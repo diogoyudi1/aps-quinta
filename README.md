@@ -4,8 +4,6 @@ API REST para o gerenciamento de **planos** e **alunos** de uma academia, desenv
 Supervisionada (APS) da disciplina de **Desenvolvimento Back-End** – 4º período de Engenharia de Software,
 Campus SJP.
 
-Autores: Eduardo Lopes, Diogo Yudi
-
 ---
 
 ## Sumário
